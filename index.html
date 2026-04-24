@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lz LLC</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #9b87f5;
+      --primary-dark: #7c6ce0;
+      --primary-light: #ede9fe;
+      --text: #1e1e2e;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --card-bg: #f9f7ff;
+      --border: #e5e1f5;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── 네비게이션 ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-svg {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* ── 히어로 섹션 ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 5rem;
+      background: linear-gradient(135deg, #f0ecff 0%, #ffffff 55%, #f5f0ff 100%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #c4b5fd;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      max-width: 700px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(155, 135, 245, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── 특징 섹션 ── */
+    .features {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(155, 135, 245, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── CTA 섹션 ── */
+    .cta {
+      background: linear-gradient(135deg, #9b87f5 0%, #b8a9f8 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 1.5rem;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--primary-dark);
+    }
+
+    .btn-white:hover {
+      background: #f5f0ff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── 프로덕트 섹션 ── */
+    .products {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--white);
+    }
+
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(155, 135, 245, 0.15);
+      border-color: var(--primary);
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .product-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .product-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .product-link {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 600px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 네비게이션 -->
+  <nav>
+    <a href="#" class="logo-wrap">
+      <!-- Lz LLC 라벤더 로고 -->
+      <svg class="logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="10" fill="#9b87f5"/>
+        <rect width="36" height="36" rx="10" fill="url(#lg)"/>
+        <text x="18" y="24" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="15" fill="white" letter-spacing="-0.5">Lz</text>
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#b8a9f8"/>
+            <stop offset="100%" stop-color="#7c6ce0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="logo-text">
+        <span class="logo-name">Lz LLC</span>
+        <span class="logo-tagline">Est. 2022</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">특징</a></li>
+      <li><a href="#products">프로덕트</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+  </nav>
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <span class="hero-badge">✦ Lz LLC 공식 홈페이지</span>
+    <h1>아이디어를 현실로,<br /><span>Lz LLC와 함께하세요</span></h1>
+    <p>새로운 가능성을 열어가는 Lz LLC입니다. GitHub와 Vercel로 구축된 공식 페이지에 오신 것을 환영합니다.</p>
+    <div class="btn-group">
+      <a href="#features" class="btn btn-primary">시작하기 →</a>
+      <a href="#contact" class="btn btn-outline">더 알아보기</a>
+    </div>
+  </section>
+
+  <!-- 특징 카드 -->
+  <section class="features" id="features">
+    <h2 class="section-title">주요 특징</h2>
+    <p class="section-sub">Lz LLC가 제공하는 가치입니다</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>빠른 실행력</h3>
+        <p>아이디어를 빠르게 현실로 만드는 실행 중심의 조직입니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>신뢰 기반 협력</h3>
+        <p>파트너와 고객 모두와 투명하고 신뢰할 수 있는 관계를 만들어갑니다.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>글로벌 지향</h3>
+        <p>국경을 넘어 더 넓은 세상을 향해 나아가는 비전을 가지고 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 프로덕트 -->
+  <section class="products" id="products">
+    <h2 class="section-title">프로덕트</h2>
+    <p class="section-sub">Lz LLC가 만든 서비스입니다</p>
+    <div class="product-cards">
+      <a href="https://tax.lim.kr" target="_blank" class="product-card">
+        <span class="product-badge">세금 계산기</span>
+        <h3>연말정산 / 종합소득세 계산</h3>
+        <p>복잡한 연말정산과 종합소득세를 간편하게 계산해보세요. 누구나 쉽게 사용할 수 있습니다.</p>
+        <span class="product-link">tax.lim.kr →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <h2>Lz LLC와 함께할 준비가 되셨나요?</h2>
+    <p>궁금한 점이 있으시면 언제든지 연락주세요. 함께 만들어가겠습니다.</p>
+    <a href="mailto:company@lim.kr" class="btn btn-white">연락하기 ✉</a>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <p>© 2026 Lz LLC · All rights reserved · Deployed on Vercel</p>
+  </footer>
+
+</body>
+</html>
